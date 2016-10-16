@@ -1,5 +1,5 @@
-<script type="text/javascript">
-   jQuery(document).ready(function ($) {
+<script>
+   (function ($){
         console.log("Django dynamic formsets");
         // Checks if input is empty or, in case of a checkbox, unchecked
         var checkEmpty = function ($inputToCheck) {
@@ -177,6 +177,6 @@
             $(this).parents("form").submit();
         });
 
-   });
+   }(django.jQuery));
 
 </script>
