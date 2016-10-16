@@ -1,8 +1,9 @@
 <script type="text/javascript">
-    ( function($) {
-
+    $(function(){
+        console.log("Django dynamic formsets");
         // Checks if input is empty or, in case of a checkbox, unchecked
         var checkEmpty = function ($inputToCheck) {
+            console.log("Checking empty");
             var isEmpty = false;
             if ($inputToCheck.attr('type') === 'checkbox') {
                 isEmpty = !$inputToCheck.prop('checked');
@@ -17,6 +18,7 @@
 
         //Checks if all inputs in this container are empty/unchecked
         var allEmpty = function ($toCheck) {
+            console.log("All empty");
             var isEmpty = true;
             $toCheck.find('input').each(function () {
                 if (!checkEmpty($(this))) {
@@ -30,6 +32,7 @@
 
         //Writes the correct current order in the order form fields
         var correctOrder = function () {
+            console.log("Correcting order");
             var localSortItemCounter = 1;
             $("[id$=ORDER]").each(function () {
                 $(this).attr('value', localSortItemCounter);
@@ -174,6 +177,6 @@
             $(this).parents("form").submit();
         });
 
-    } ) ( jQuery );
+   });
 
 </script>
