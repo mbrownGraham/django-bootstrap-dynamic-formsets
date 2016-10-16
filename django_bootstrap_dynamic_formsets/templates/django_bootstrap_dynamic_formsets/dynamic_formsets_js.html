@@ -45,18 +45,18 @@
         $("[id$=DELETE]").parents(".form-group").hide();
 
         //Holds an empty form
-        var $emptyForm = $('#{% if formset.prefix %}{{formset.prefix}}-{% endif %}empty-form').remove().children().unwrap();
+        var $emptyForm = $('#candidate_set-empty-form').remove().children().unwrap();
 
-        var $sortItem = $('.sort-item.{{formset.prefix}}');
+        var $sortItem = $('.sort-item.candidate_set');
 
         //Disable Up button on first and Down button on last form
         var setUpDownButtons = function () {
-            $sortItem = $('.sort-item.{{formset.prefix}}');
-            $sortItem.find(".up-form{% if formset.prefix %}-{{formset.prefix}}{% endif %}, .down-form{% if formset.prefix %}-{{formset.prefix}}{% endif %}").each(function () {
+            $sortItem = $('.sort-item.candidate_set');
+            $sortItem.find(".up-form-candidate_set, .down-form-candidate_set").each(function () {
                 $(this).prop("disabled", false);
             });
-            $sortItem.first().find(".up-form{% if formset.prefix %}-{{formset.prefix}}{% endif %}").prop("disabled", true);
-            $sortItem.last().find(".down-form{% if formset.prefix %}-{{formset.prefix}}{% endif %}").prop("disabled", true);
+            $sortItem.first().find(".up-form-candidate_set").prop("disabled", true);
+            $sortItem.last().find(".down-form-candidate_set").prop("disabled", true);
         };
 
 
@@ -76,7 +76,7 @@
         //$('body').prepend('<p>Count ({{formset.prefix}}): ' + sortItemCounter + '</p>');
 
         //Mark initial forms as such
-        var numInitialForms = $('#id_{% if formset.prefix %}{{formset.prefix}}-{% endif %}INITIAL_FORMS').val();
+        var numInitialForms = $('#id_candidate_set-INITIAL_FORMS').val();
         var i = 0;
         $sortItem.each(function () {
             if (i < numInitialForms) {
@@ -87,7 +87,7 @@
             }
         });
 
-        var numTotalForms = $('#id_{% if formset.prefix %}{{formset.prefix}}-{% endif %}TOTAL_FORMS').val();
+        var numTotalForms = $('#id_candidate_set-TOTAL_FORMS').val();
         //Fix order (important if page reloads after validation failed)
         for (i = 1; i < numTotalForms; i++) {
             $sortItem.find('[id$=ORDER][value=' + (i + 1) + ']').parents(".sort-item").insertAfter($sortItem.find('[id$=ORDER][value=' + i + ']').parents(".sort-item"));
@@ -97,15 +97,15 @@
         //Set up sortable jQuery UI interaction
         {% if can_order %}
 
-            var $sortable = $('#sortable{% if formset.prefix %}-{{formset.prefix}}{% endif %}');
+            var $sortable = $('#sortable-candidate_set');
 
             $sortable.sortable({
-                items: ".sort-item.{{formset.prefix}}",
+                items: ".sort-item.candidate_set",
                 axis: "y",
                 scrollSensitivity: 100,
                 scrollSpeed: 5,
                 tolerance: "intersect",
-                handle: ".sort-handle{% if formset.prefix %}-{{formset.prefix}}{% endif %}",
+                handle: ".sort-handle-candidate_set",
                 cancel: "input,textarea,select,option"
             });
             $sortable.on("sortupdate", function (event, ui) {
@@ -113,13 +113,13 @@
             });
             setUpDownButtons();
 
-            $(document).on('click', '.up-form{% if formset.prefix %}-{{formset.prefix}}{% endif %}', function () {
+            $(document).on('click', '.up-form-candidate_set', function () {
                 var $parentSortItem = $(this).parents(".sort-item");
                 $parentSortItem.insertBefore($parentSortItem.prev());
                 setUpDownButtons();
             });
 
-            $(document).on('click', '.down-form{% if formset.prefix %}-{{formset.prefix}}{% endif %}', function () {
+            $(document).on('click', '.down-form-candidate_set', function () {
                 var $parentSortItem = $(this).parents(".sort-item");
                 $parentSortItem.insertAfter($parentSortItem.next());
                 setUpDownButtons();
@@ -149,20 +149,20 @@
         });
 
         // Add form
-        $(document).on('click', '.add-form{% if formset.prefix %}-{{formset.prefix}}{% endif %}', function () {
+        $(document).on('click', '.add-form-candidate_set', function () {
             var formCopy = $emptyForm.clone();
             console.log(formCopy);
             var formCopyString = formCopy.html().replace(/__prefix__/g, "" + sortItemCounter);
             formCopy.html(formCopyString);
             sortItemCounter++;
             $(this).parents(".sort-item").after(formCopy);
-            $('#id_{% if formset.prefix %}{{formset.prefix}}-{% endif %}TOTAL_FORMS').attr('value', sortItemCounter);
+            $('#id_candidate_set-TOTAL_FORMS').attr('value', sortItemCounter);
         });
 
         //Submit formset
-        $('#form-submit-{% if formset.prefix %}{{formset.prefix}}{% endif %}').click(function (e) {
+        $('#form-submit-candidate_set').click(function (e) {
             e.preventDefault();
-            $('.sort-item.{{formset.prefix}}').each(function () {
+            $('.sort-item.candidate_set').each(function () {
                 if (allEmpty($(this))) {
                   console.log("I'm all empty, so removing myself!")
                     $(this).remove();
