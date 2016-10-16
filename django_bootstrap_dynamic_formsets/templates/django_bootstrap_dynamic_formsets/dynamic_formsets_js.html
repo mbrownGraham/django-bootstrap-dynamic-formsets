@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $(document).ready(function () {
+    (function($) {
 
         // Checks if input is empty or, in case of a checkbox, unchecked
         var checkEmpty = function ($inputToCheck) {
@@ -129,8 +129,8 @@
 
         // Remove form
         $(document).on('click', '.delete-form{% if formset.prefix %}-{{formset.prefix}}{% endif %}', function () {
-        	console.log("Attempting to delete form {{formset.prefix}}");
-        	console.log($(this));
+          console.log("Attempting to delete form {{formset.prefix}}");
+          console.log($(this));
             var $parentSortItem = $(this).parents(".sort-item");
             if ($parentSortItem.hasClass('{% if formset.prefix %}{{formset.prefix}}-{% endif %}initial-form')) {
                 $parentSortItem.effect('drop');
@@ -160,12 +160,12 @@
             e.preventDefault();
             $('.sort-item.{{formset.prefix}}').each(function () {
                 if (allEmpty($(this))) {
-                	console.log("I'm all empty, so removing myself!")
+                  console.log("I'm all empty, so removing myself!")
                     $(this).remove();
                 }
                 else
                 {
-                	console.log("Not empty, so not removing!")
+                  console.log("Not empty, so not removing!")
                 }
             });
             {% if can_order %}
