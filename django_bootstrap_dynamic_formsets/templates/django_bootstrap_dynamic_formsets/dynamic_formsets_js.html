@@ -151,6 +151,7 @@
         // Add form
         $(document).on('click', '.add-form{% if formset.prefix %}-{{formset.prefix}}{% endif %}', function () {
             var formCopy = $emptyForm.clone();
+            console.log(formCopy);
             var formCopyString = formCopy.html().replace(/__prefix__/g, "" + sortItemCounter);
             formCopy.html(formCopyString);
             sortItemCounter++;
