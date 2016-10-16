@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    jQuery(document).ready(function () {
+    ( function($) {
 
         // Checks if input is empty or, in case of a checkbox, unchecked
         var checkEmpty = function ($inputToCheck) {
@@ -174,6 +174,6 @@
             $(this).parents("form").submit();
         });
 
-    });
+    } ) ( jQuery );
 
 </script>
