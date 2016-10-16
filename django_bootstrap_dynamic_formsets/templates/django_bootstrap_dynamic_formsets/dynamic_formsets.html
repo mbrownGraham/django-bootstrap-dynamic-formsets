@@ -2,8 +2,6 @@
 {% load bootstrap_dynamic_formsets %}
 {% load staticfiles %}
 
-{% bootstrap_dynamic_formset_js %}
-
 <link href="{% static 'django_bootstrap_dynamic_formsets/extra.css' %}" rel="stylesheet">
 
 <div class="display:none" id="{% if formset.prefix %}{{formset.prefix}}-{% endif %}empty-form">
