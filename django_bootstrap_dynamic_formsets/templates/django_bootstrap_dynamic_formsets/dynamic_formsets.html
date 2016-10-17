@@ -6,8 +6,6 @@
 
 <div class="display:none" id="{% if formset.prefix %}{{formset.prefix}}-{% endif %}empty-form">
     <div class="{{ form_wrapper }} sort-item {{formset.prefix}}">
-        {{ form.non_field_errors }}
-        {{ form.errors }}
         {% bootstrap_form formset.empty_form layout=layout%}
         <div>
             {% if can_order %}
@@ -27,8 +25,6 @@
     {{ formset.management_form }}
     {% for form in formset %}
         <div class="{{ form_wrapper }} sort-item {{formset.prefix}}">
-            {{ form.non_field_errors }}
-            {{ form.errors }}
             {% bootstrap_form form layout=layout%}
             <div>
                 {% if can_order %}
